@@ -3,10 +3,11 @@ use proconio::input;
 #[allow(non_snake_case)]
 fn main() {
     input! {
-        A: u32,
-        B: u32
+        N: usize,
+        S: [usize; N],
+        T: [usize; N]
     }
 
-    let ans = 32u64.pow(A - B);
+    let ans = 0;
     println!("{}", ans);
 }
