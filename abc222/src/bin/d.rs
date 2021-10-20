@@ -1,5 +1,5 @@
 use proconio::input;
-use std::cmp;
+
 const M: usize = 998_244_353;
 const MX: usize = 3_000;
 #[allow(non_snake_case)]
@@ -10,26 +10,18 @@ fn main() {
         B: [usize; N]
     }
 
-    // 前回の
+    // dp(i, j) := i番目までci = j 以下の総数の累積和
+    // 解答はdp(N, MX)
     let mut dp = vec![vec![0usize; MX as usize + 1]; N + 1];
-
+    dp[0][0] = 1;
     for i in 0..N {
-        let a = A[i];
-        let b = B[i];
-        for c in 0..=MX {
-            let n = dp[i][c];
-            let x = cmp::min(c, a as usize);
-            for y in x..=b {
-                dp[i + 1][y] = (n + dp[i + 1][y] + 1) % M;
+        for j in 0..MX {
+            dp[i + 1][j + 1] = dp[i + 1][j] % M;
+            if A[i] <= j && j <= B[i] {
+                dp[i + 1][j + 1] = dp[i][j + 1] % M;
             }
         }
     }
 
-    let mut ans = 0;
-    for x in dp[N - 1].iter() {
-        ans = (ans + x) % M;
-    }
-    if N < 100 {
-        println!("{:?}", dp);
-    }
+    println!("{}", dp[N][MX]);
 }
