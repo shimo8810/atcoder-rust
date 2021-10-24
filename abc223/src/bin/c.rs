@@ -1,3 +1,12 @@
+use proconio::input;
+
+#[allow(non_snake_case)]
 fn main() {
-    unimplemented!();
+    input! {
+        N: usize,
+    
+    }
+
+    let ans = 0;
+    println!("{}", ans);
 }
