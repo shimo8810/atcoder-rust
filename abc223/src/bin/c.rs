@@ -4,9 +4,16 @@ use proconio::input;
 fn main() {
     input! {
         N: usize,
-    
+        AB: [(f32, f32); N]
+    }
+    let mut t: f32 = AB.iter().map(|&(a, b)| a / b / 2.0).sum();
+
+    let mut ans = 0.0;
+
+    for &(a, b) in AB.iter() {
+        ans += a.min(b * t);
+        t -= t.min(a / b);
     }
 
-    let ans = 0;
     println!("{}", ans);
 }
