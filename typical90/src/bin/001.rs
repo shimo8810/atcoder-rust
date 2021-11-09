@@ -1,43 +1,35 @@
-use proconio::input;
+use proconio::{fastout, input};
 
 #[allow(non_snake_case)]
+#[fastout]
 fn main() {
     input! {
-        N: usize,
-        L: usize,
-        K: usize,
-        A: [usize; N]
+      N: usize,
+      L: u64,
+      K: usize,
+      A: [u64; N]
     }
-    let mut len = L / (K + 1);
-    let mut left = 0;
-    let mut right = len;
 
-    let mut c = 0;
-    loop {
-        c += 1;
-        if c > 20 {
-            break;
-        }
-        let mut offset = 0;
-        let mut min = L;
+    let mut left = 0; // 条件を満たす
+    let mut right = L; // 条件を満たさない
+
+    while right - left > 1 {
+        let x = (right + left) / 2;
+
         let mut k = 0;
+        let mut p = 0;
+
         for &a in A.iter() {
-            if a - offset >= len {
-                min = std::cmp::min(a - offset, min);
-                offset = a;
+            if a - p >= x && L - a >= x {
+                p = a;
                 k += 1;
             }
         }
-
-        min = std::cmp::min(L - offset, min);
-        println!("{}-{}-{}: {}-{}", left, len, right, min, k);
-
-        if min >= len && k >= K {
-            left = len;
-            len = (right + len) / 2;
+        if k >= K {
+            left = x;
         } else {
-            right = len;
-            len = (left + len) / 2;
+            right = x;
         }
     }
+    println!("{}", left);
 }

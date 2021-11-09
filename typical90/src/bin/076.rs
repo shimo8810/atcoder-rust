@@ -24,10 +24,10 @@ fn main() {
     let mut sum = 0;
     let mut h = 0;
     let mut t = 0;
+    // 尺取り法
     let ans = loop {
         while t < 2 * N && sum < S {
             sum += A[t];
-            // println!("{}-{}", h, t);
             t += 1;
         }
 
