@@ -13,6 +13,7 @@ fn powmod(x: u64, mut n: u64, m: u64) -> u64 {
     }
     ret
 }
+
 #[allow(non_snake_case)]
 #[fastout]
 fn main() {
