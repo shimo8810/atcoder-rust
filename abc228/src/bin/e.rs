@@ -1,32 +1,30 @@
 use proconio::{fastout, input};
 
-const Q: u128 = 998244353;
-
+/// モジュロ演算付き繰り返し二乗法
+fn powmod(x: u64, mut n: u64, m: u64) -> u64 {
+    let mut ret = 1;
+    let mut x = x % m;
+    while n > 0 {
+        if n & 1 == 1 {
+            ret = (ret * x) % m;
+        }
+        x = (x * x) % m;
+        n >>= 1;
+    }
+    ret
+}
 #[allow(non_snake_case)]
 #[fastout]
 fn main() {
     input! {
-      N: u128,
-      K: u128,
-      M: u128
-    }
-    let N = N % Q;
-    let K = K % Q;
-    let M = M % Q;
-
-    let L = ((K * M) % Q) as u128;
-    let mut buf = vec![0u128; 1000];
-    buf[1] = N;
-    for i in 2..1000 {
-        buf[i] = (buf[i - 1] * buf[i - 1]) % Q;
+      N: u64,
+      K: u64,
+      M: u64
     }
 
-    let mut ans = 1;
-    for (i, c) in format!("{:b}", L).chars().rev().enumerate() {
-        if c == '1' {
-            ans = (ans * buf[i + 1]) % Q;
-        }
-    }
+    const P: u64 = 998244353;
+
+    let r = powmod(K, N, P - 1);
+    let ans = if M % P == 0 { 0 } else { powmod(M, r, P) };
     println!("{}", ans);
-    // println!("{}", );
 }
