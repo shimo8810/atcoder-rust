@@ -1,14 +1,14 @@
 use proconio::{fastout, input, marker::Usize1};
 
 #[allow(dead_code)]
-struct UFT {
+struct Uft {
     par: Vec<usize>,
     size: Vec<usize>,
     n: usize,
 }
 
 #[allow(dead_code)]
-impl UFT {
+impl Uft {
     fn new(n: usize) -> Self {
         let par = (0..n).collect();
         let size = vec![1; n];
@@ -54,7 +54,7 @@ fn main() {
         list[a].push(b);
     }
 
-    let mut uft = UFT::new(N);
+    let mut uft = U::new(N);
     let mut res = vec![0];
 
     let mut ans = 0;

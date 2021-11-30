@@ -1,5 +1,4 @@
 use proconio::{fastout, input, marker::Chars};
-
 #[allow(non_snake_case)]
 #[fastout]
 fn main() {
@@ -8,31 +7,25 @@ fn main() {
       K: usize
     }
 
-    if K >= S.len() {
-        println!("{}", S.len());
-        return;
+    let mut v = vec![];
+    let mut n = 0;
+    for c in S.iter() {
+        v.push(n);
+        if *c == '.' {
+            n += 1;
+        }
     }
+    v.push(n);
 
+    let mut r = 0;
     let mut ans = 0;
-    let mut s = 0;
-    let mut t = 0;
-    let mut k = 0;
-    loop {
-        while t < S.len() && k <= K {
-            if S[t] == '.' {
-                k += 1;
-            }
-            t += 1;
+
+    for l in 0..S.len() {
+        while r < S.len() && v[r + 1] - v[l] <= K {
+            r += 1;
         }
-        if k < K {
-            break;
-        }
-        println!("{}-{}", s, t);
-        ans = std::cmp::max(ans, t - s);
-        if S[s] == '.' {
-            k -= 1;
-        }
-        s += 1;
+
+        ans = std::cmp::max(ans, r - l);
     }
     println!("{}", ans);
 }
