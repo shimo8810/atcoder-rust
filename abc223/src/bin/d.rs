@@ -1,46 +1,46 @@
-use proconio::{input, marker::Usize1};
+use proconio::{fastout, input, marker::Usize1};
 use std::cmp::Reverse;
 use std::collections::BinaryHeap;
 
+// トポロジカルソート(Topological Sort)
+
 #[allow(non_snake_case)]
+#[fastout]
 fn main() {
     input! {
-        N: usize,
-        M: usize
+      N: usize,
+      M: usize,
     }
-
-    let mut incnt = vec![0; N];
-    let mut out = vec![Vec::new(); N];
+    let mut list = vec![vec![]; N];
+    let mut cnt = vec![0; N];
 
     for _ in 0..M {
-        input! { a: Usize1, b: Usize1 }
-        incnt[b] += 1;
-        out[a].push(b);
+        input! {a: Usize1, b: Usize1}
+        list[a].push(b);
+        cnt[b] += 1;
     }
 
-    let mut heap: BinaryHeap<_> = incnt
-        .iter()
-        .enumerate()
-        .filter(|(_, &n)| n == 0)
-        .map(|(i, _)| Reverse(i))
-        .collect();
+    let mut heap = BinaryHeap::new();
 
-    let mut ans = Vec::new();
-    while let Some(Reverse(n)) = heap.pop() {
-        ans.push(n + 1);
-        for &x in out[n].iter() {
-            incnt[x] -= 1;
-            if incnt[x] == 0 {
-                heap.push(Reverse(x));
+    for (i, &c) in cnt.iter().enumerate() {
+        if c == 0 {
+            heap.push(Reverse(i));
+        }
+    }
+    let mut ans = vec![];
+    while let Some(Reverse(u)) = heap.pop() {
+        ans.push((u + 1).to_string());
+        for &v in list[u].iter() {
+            cnt[v] -= 1;
+            if cnt[v] == 0 {
+                heap.push(Reverse(v));
             }
         }
     }
-
-    if ans.is_empty() {
-        println!("-1");
+    let ans = if ans.len() != N {
+        "-1".to_string()
     } else {
-        for (i, x) in ans.iter().enumerate() {
-            print!("{}{}", x, if i <= N { " " } else { "\n" });
-        }
-    }
+        ans.join(" ")
+    };
+    println!("{}", ans);
 }
