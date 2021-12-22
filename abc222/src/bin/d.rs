@@ -11,17 +11,25 @@ fn main() {
     }
 
     // dp(i, j) := i番目までci = j 以下の総数の累積和
-    // 解答はdp(N, MX)
-    let mut dp = vec![vec![0usize; MX as usize + 1]; N + 1];
-    dp[0][0] = 1;
+    let mut dp = vec![0; MX + 1];
+    dp[0] = 1;
     for i in 0..N {
+        let mut p = vec![0; MX + 1];
+        std::mem::swap(&mut dp, &mut p);
         for j in 0..MX {
-            dp[i + 1][j + 1] = dp[i + 1][j] % M;
+            p[j + 1] = (p[j + 1] + p[j]) % M;
+        }
+
+        for j in 0..=MX {
             if A[i] <= j && j <= B[i] {
-                dp[i + 1][j + 1] = dp[i][j + 1] % M;
+                dp[j] = p[j] % M;
             }
         }
     }
 
-    println!("{}", dp[N][MX]);
+    let mut ans = 0;
+    for &x in dp.iter() {
+        ans = (ans + x) % M;
+    }
+    println!("{}", ans);
 }
