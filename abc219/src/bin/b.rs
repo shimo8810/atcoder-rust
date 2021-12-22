@@ -1,14 +1,16 @@
-use proconio::input;
-use proconio::marker::Chars;
+use proconio::{fastout, input, marker::Chars};
 
 #[allow(non_snake_case)]
+#[fastout]
 fn main() {
     input! {
-        S: [String; 3],
-        T: Chars,
+      S: [String; 3],
+      T: Chars
     }
 
-    for x in T {
-        print!("{}", S[x as usize - 49]);
+    for &t in T.iter() {
+        let t = (t as usize) - '0' as usize;
+        print!("{}", S[t - 1]);
     }
+    println!();
 }
