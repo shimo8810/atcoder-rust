@@ -6,6 +6,6 @@ fn main() {
         P: [u8; 26]
     }
 
-    let ans: String = P.iter().map(|&x| (x - 1 + 'a' as u8) as char).collect();
+    let ans: String = P.iter().map(|&x| (x - 1 + b'a') as char).collect();
     println!("{}", ans);
 }
