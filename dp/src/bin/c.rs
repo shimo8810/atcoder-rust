@@ -1,21 +1,29 @@
-#![allow(unused_imports)]
-use proconio::input;
-use std::cmp;
+use proconio::{fastout, input};
+use std::cmp::max;
 
 #[allow(non_snake_case)]
+#[fastout]
 fn main() {
     input! {
-        N: usize,
-        ABC: [[i64; 3]; N],
+      N: usize,
+      ABC: [[u32; 3]; N]
     }
 
-    let mut dp = vec![[0; 3]; N + 1];
+    let mut dp = vec![[0; 3]; N];
 
-    for i in 1..=N {
-        let a = &ABC[i - 1];
+    for i in 0..3 {
+        dp[0][i] = ABC[0][i];
+    }
+
+    for i in 1..N {
         for j in 0..3 {
-            dp[i][j] = cmp::max(dp[i - 1][(j + 1) % 3] + a[j], dp[i - 1][(j + 2) % 3] + a[j]);
+            dp[i][j] = max(
+                dp[i - 1][(j + 1) % 3] + ABC[i][j],
+                dp[i - 1][(j + 2) % 3] + ABC[i][j],
+            );
         }
     }
-    println!("{}", dp[N].iter().max().unwrap());
+
+    let ans = dp[N - 1].iter().max().unwrap();
+    println!("{}", ans);
 }

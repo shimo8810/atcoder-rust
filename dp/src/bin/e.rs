@@ -1,28 +1,37 @@
-#![allow(unused_imports)]
-use proconio::input;
-use std::cmp;
+use proconio::{fastout, input};
+
+const V: usize = 100_000;
+const WMAX: usize = 1_000_000_001; // 最大値よりも大きい数値を指定
 
 #[allow(non_snake_case)]
+#[fastout]
 fn main() {
     input! {
-        N: usize,
-        W: usize,
-        WV: [(usize, usize); N],
+      N: usize,
+      W: usize
     }
 
-    let mut dp = vec![vec![1_000_000_000; 1_000 * 100 + 1]; N + 1];
+    let mut dp = vec![vec![WMAX; V + 1]; N + 1];
     dp[0][0] = 0;
-    for i in 0..N {
-        let (w, v) = WV[i];
-        for j in 0..=(1_000 * 100) {
-            //
-            if j < v {
-                //
-                dp[i + 1][j] = dp[i][j];
+    for i in 1..=N {
+        input! {wi: usize, vi: usize}
+        for v in 0..=V {
+            if v < vi {
+                // 大きすぎるときは入れない
+                dp[i][v] = dp[i - 1][v];
             } else {
-                dp[i + 1][j] = cmp::min(dp[i][j], dp[i][j - v] + w);
+                // 入れる場合と入れない場合の最大
+                dp[i][v] = dp[i - 1][v].min(dp[i - 1][v - vi] + wi);
             }
         }
     }
-    println!("{:?}", dp[N].iter().rev().find(|&&x| x <= W).unwrap());
+
+    let mut ans = 0;
+
+    for (v, &w) in dp[N].iter().enumerate() {
+        if w <= W {
+            ans = ans.max(v);
+        }
+    }
+    println!("{}", ans);
 }
