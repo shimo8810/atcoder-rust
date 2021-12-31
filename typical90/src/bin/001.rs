@@ -10,6 +10,8 @@ fn main() {
       A: [u64; N]
     }
 
+    // 最小値の最大化を行う二分探索
+
     let mut left = 0; // 条件を満たす
     let mut right = L; // 条件を満たさない
 

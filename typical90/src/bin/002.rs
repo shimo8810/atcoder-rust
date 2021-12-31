@@ -7,6 +7,7 @@ fn main() {
         N: u32
     }
 
+    // 全探索
     if N % 2 != 0 {
         return;
     }

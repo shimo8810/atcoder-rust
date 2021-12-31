@@ -23,6 +23,7 @@ fn bfs(n: usize, s: usize, list: &[Vec<usize>]) -> (usize, i64) {
 #[fastout]
 fn main() {
     input! { N: usize }
+    // 木の直径 最短距離計算 2回
     let mut list = vec![Vec::new(); N];
 
     for _ in 1..N {

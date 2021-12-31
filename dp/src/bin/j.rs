@@ -4,9 +4,10 @@ use proconio::{fastout, input};
 #[fastout]
 fn main() {
     input! {
-      N: usize,
+        N: usize,
+        A: [u32; N]
     }
 
-    let ans = 0;
-    println!("{}", ans);
+    let mut dp = vec![vec![vec![0.0; N + 1]; N + 1]; N + 1];
+    
 }
