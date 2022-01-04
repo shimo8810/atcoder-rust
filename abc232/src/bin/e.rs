@@ -15,15 +15,21 @@ fn main() {
         y2: Usize1,
     }
     let mut dp = vec![vec![0; 4]; K + 1];
+
     let i = if x1 == x2 && y1 == y2 {
+        // 終了マスのとき
         0
     } else if x1 == x2 {
+        // 終了マスと同じ行のとき
         1
     } else if y1 == y2 {
+        // 終了マスと同じ列のとき
         2
     } else {
+        // それ以外
         3
     };
+
     dp[0][i] = 1;
 
     for k in 1..=K {

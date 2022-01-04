@@ -1,9 +1,11 @@
 use itertools::Itertools;
 use proconio::{fastout, input, marker::Usize1};
 use std::collections::HashSet;
+
 const YES: &str = "Yes";
 const NO: &str = "No";
 use std::cmp::{max, min};
+
 #[allow(non_snake_case)]
 #[fastout]
 fn main() {

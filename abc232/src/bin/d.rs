@@ -2,6 +2,7 @@ use proconio::{fastout, input, marker::Chars};
 use std::cmp::max;
 use std::collections::HashSet;
 use std::collections::VecDeque;
+
 #[allow(non_snake_case)]
 #[fastout]
 fn main() {

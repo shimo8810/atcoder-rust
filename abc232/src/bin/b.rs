@@ -14,11 +14,16 @@ fn main() {
     let T: Vec<_> = T.iter().map(|&x| x as i32).collect();
 
     let d = (S[0] - T[0] + 26) % 26;
-    for i in 0..S.len() {
-        if d != (S[i] - T[i] + 26) % 26 {
-            println!("{}", NO);
-            return;
-        }
-    }
-    println!("{}", YES);
+
+    let ans = if S
+        .iter()
+        .zip(T.iter())
+        .all(|(&x, &y)| (y + d) % 26 == x % 26)
+    {
+        YES
+    } else {
+        NO
+    };
+
+    println!("{}", ans);
 }
