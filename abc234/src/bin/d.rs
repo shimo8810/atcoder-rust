@@ -1,6 +1,7 @@
 use proconio::{fastout, input};
 use std::cmp::Reverse;
 use std::collections::BinaryHeap;
+use std::iter::FromIterator;
 
 #[allow(non_snake_case)]
 #[fastout]

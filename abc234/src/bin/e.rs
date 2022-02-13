@@ -7,6 +7,6 @@ fn main() {
         N: usize,
     }
 
-    let mut ans = 0;
+    let ans = 0;
     println!("{}", ans);
 }
