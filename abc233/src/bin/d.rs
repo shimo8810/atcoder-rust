@@ -20,7 +20,7 @@ fn main() {
         map.entry(S[i + 1]).or_insert_with(Vec::new).push(i + 1);
     }
 
-    for (i, s in S.iter().enumerate() {
+    for (i, s) in S.iter().enumerate() {
         if let Some(v) = map.get(&(s - K)) {
             ans += match v.binary_search_by(|probe| probe.cmp(&i)) {
                 Ok(x) => x,
@@ -28,5 +28,5 @@ fn main() {
             };
         }
     }
-    println!("{}", ans)
+    println!("{}", ans);
 }
