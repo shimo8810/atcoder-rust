@@ -1,33 +1,34 @@
 use proconio::input;
 
-const M: usize = 998244353;
+const M: u64 = 998244353;
+
+/// モジュロ演算付き繰り返し二乗法
+fn powmod(x: u64, mut n: u64, m: u64) -> u64 {
+    let mut ret = 1;
+    let mut x = x % m;
+    while n > 0 {
+        if n & 1 == 1 {
+            ret = (ret * x) % m;
+        }
+        x = (x * x) % m;
+        n >>= 1;
+    }
+    ret
+}
 
 #[allow(non_snake_case)]
 fn main() {
     input! {
-        N: usize,
-        D: usize
+        N: u64,
+        D: u64
     }
-    // power of two
-    let mut pt = vec![1; 2 * N + 1];
-    for i in 1..=(2 * N) {
-        pt[i] = (pt[i - 1] * 2) % M;
-    }
+
     let mut ans = 0;
 
-    for k in 0..N {
-        //
-        if k + D < N {
-            ans = (ans + 2 * pt[D]) % M;
+    for i in 0..(N - 1) {
+        if i + D <= N - 1 {
+            ans += powmod(2, D, M);
         }
-        println!("{} + {} < {}, {}", k, D, N, N - k);
-        let n = if k + D + 1 < N {
-            N - k
-        } else {
-            2 * N - 2 * k - D
-        };
-        ans = (ans + n * pt[D - 1]) % M;
     }
-
     println!("{}", ans);
 }
