@@ -15,7 +15,7 @@ jobs:
           pip install requests
       - name: run python
         run: python scripts/update_readme.py
-      - name: commit file
+      - name: commit readme
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
