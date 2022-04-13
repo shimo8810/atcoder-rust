@@ -9,7 +9,7 @@ CONTEST_NAMES = ("abc", "arc", "agc")
 def generate_readme(progress_info) -> str:
     progress_badges = "\n".join(
         [
-            f"![{name.upper()}](https://progress-bar.dev/{nac}/?title=ABC&scale={total}&width=110&suffix=)"  # noqa
+            f"![{name.upper()}](https://progress-bar.dev/{nac}/?title={name.upper()}&scale={total}&width=110&suffix=)"  # noqa
             for name, nac, total in progress_info
         ]
     )
