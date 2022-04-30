@@ -10,8 +10,9 @@ fn main() {
     input! {
         S: Chars
     }
-    let capitals: HashSet<_> = ('A'..'Z').collect();
-    let smalls: HashSet<_> = ('a'..'z').collect();
+    
+    let smalls: HashSet<_> = (b'a'..b'z').map(|x| x as char).collect();
+    let capitals: HashSet<_> = (b'A'..b'Z').map(|x| x as char).collect();
 
     let ans = if S.iter().collect::<HashSet<&char>>().len() == S.len()
         && S.iter().any(|c| capitals.contains(c))
