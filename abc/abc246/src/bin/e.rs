@@ -17,17 +17,45 @@ fn main() {
     let mut visited = vec![vec![false; N]; N];
     // visited[A.0][A.1] = true;
     let mut queue = VecDeque::new();
-    queue.push_back(A);
+    queue.push_back((A, 0));
 
-    while let Some((x, y)) = queue.pop_front() {
+    while let Some(((x, y), k)) = queue.pop_front() {
+        if B == (x, y) {
+            println!("{}", k);
+            return;
+        }
         visited[x][y] = true;
 
-        for dx in (-1, 1) {
-            for dy in (-1, 1) {
-                //
+        let mut i = 1;
+        while x >= i && y >= i && S[x - i][y - i] == '.' {
+            if !visited[x - i][y - i] {
+                queue.push_back(((x - i, y - i), k + 1));
             }
+            i += 1;
+        }
+        i = 1;
+        while x + i < N && y + i < N && S[x + i][y + i] == '.' {
+            if !visited[x + i][y + i] {
+                queue.push_back(((x + i, y + i), k + 1));
+            }
+            i += 1;
+        }
+        i = 1;
+        while x >= i && y + i < N && S[x - i][y + i] == '.' {
+            if !visited[x - i][y + i] {
+                queue.push_back(((x - i, y + i), k + 1));
+            }
+            i += 1;
+        }
+        i = 1;
+        while x + i < N && y >= i && S[x + i][y - i] == '.' {
+            if !visited[x + i][y - i] {
+                queue.push_back(((x + i, y - i), k + 1));
+            }
+            i += 1;
         }
     }
+    println!("-1");
     // let mut ans = 0;
     // println!("{}", ans);
 }
