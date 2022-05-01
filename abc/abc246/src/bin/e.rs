@@ -14,48 +14,58 @@ fn main() {
         S: [Chars; N]
     }
 
-    let mut visited = vec![vec![false; N]; N];
-    // visited[A.0][A.1] = true;
-    let mut queue = VecDeque::new();
-    queue.push_back((A, 0));
+    let dxy = [(-1, -1), (-1, 1), (1, -1), (1, 1)];
+    let mut visited = vec![vec![vec![false; 4]; N]; N];
+    let mut dist = vec![vec![vec![std::usize::MAX; 4]; N]; N];
+    let mut deq = VecDeque::new();
 
-    while let Some(((x, y), k)) = queue.pop_front() {
-        if B == (x, y) {
-            println!("{}", k);
+    for (i, (dx, dy)) in dxy.iter().enumerate() {
+        let nx = A.0 as isize + dx;
+        let ny = A.1 as isize + dy;
+
+        if nx >= 0
+            && ny >= 0
+            && nx < N as isize
+            && ny < N as isize
+            && S[nx as usize][ny as usize] == '.'
+        {
+            deq.push_back((nx, ny, i));
+            dist[nx as usize][ny as usize][i] = 1;
+        }
+    }
+
+    while let Some((x, y, d)) = deq.pop_front() {
+        if B.0 == x as usize && B.1 == y as usize {
+            println!("{}", dist[x as usize][y as usize][d]);
             return;
         }
-        visited[x][y] = true;
 
-        let mut i = 1;
-        while x >= i && y >= i && S[x - i][y - i] == '.' {
-            if !visited[x - i][y - i] {
-                queue.push_back(((x - i, y - i), k + 1));
+        visited[x as usize][y as usize][d] = true;
+
+        for (i, (dx, dy)) in dxy.iter().enumerate() {
+            let nx = x + dx;
+            let ny = y + dy;
+
+            if nx >= 0
+                && ny >= 0
+                && nx < N as isize
+                && ny < N as isize
+                && S[nx as usize][ny as usize] == '.'
+                && !visited[nx as usize][ny as usize][i]
+            {
+                if d == i {
+                    if dist[nx as usize][ny as usize][i] > dist[x as usize][y as usize][d] {
+                        deq.push_front((nx, ny, i));
+                        dist[nx as usize][ny as usize][i] = dist[x as usize][y as usize][d];
+                    }
+                } else {
+                    if dist[nx as usize][ny as usize][i] > dist[x as usize][y as usize][d] + 1 {
+                        deq.push_back((nx, ny, i));
+                        dist[nx as usize][ny as usize][i] = dist[x as usize][y as usize][d] + 1;
+                    }
+                }
             }
-            i += 1;
-        }
-        i = 1;
-        while x + i < N && y + i < N && S[x + i][y + i] == '.' {
-            if !visited[x + i][y + i] {
-                queue.push_back(((x + i, y + i), k + 1));
-            }
-            i += 1;
-        }
-        i = 1;
-        while x >= i && y + i < N && S[x - i][y + i] == '.' {
-            if !visited[x - i][y + i] {
-                queue.push_back(((x - i, y + i), k + 1));
-            }
-            i += 1;
-        }
-        i = 1;
-        while x + i < N && y >= i && S[x + i][y - i] == '.' {
-            if !visited[x + i][y - i] {
-                queue.push_back(((x + i, y - i), k + 1));
-            }
-            i += 1;
         }
     }
     println!("-1");
-    // let mut ans = 0;
-    // println!("{}", ans);
 }
