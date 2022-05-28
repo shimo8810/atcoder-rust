@@ -11,10 +11,6 @@ fn main() {
         B: u32
     }
 
-    let ans =     if A * 6 >= B {
-        YES
-    } else {
-        NO
-    };
+    let ans = if (A..=A * 6).contains(&B) { YES } else { NO };
     println!("{}", ans);
 }
