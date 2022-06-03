@@ -1,29 +1,23 @@
 use proconio::{fastout, input};
-use std::collections::HashSet;
 
 #[allow(non_snake_case)]
 #[fastout]
 fn main() {
     input! {
-      N: usize
+      N: usize,
+      mut XY: [(u32, u32); N]
     }
-    let mut set = HashSet::new();
 
-    for _ in 0..N {
-        input! {x: u32, y: u32}
-        set.insert((x, y));
-    }
+    XY.sort_unstable();
+
     let mut ans = 0;
-    for &(x1, y1) in set.iter() {
-        // 左上
-        for &(x2, y2) in set.iter() {
-            // 右下
-            if x1 == x2 && y1 == y2 {
-                continue;
-            }
-
-            println!("{}-{} vs {}-{}", x1, y1, x2, y2);
-            if set.contains(&(x1, y2)) && set.contains(&(x2, y1)) {
+    for &(x1, y1) in XY.iter() {
+        for &(x2, y2) in XY.iter() {
+            if x1 < x2
+                && y1 < y2
+                && XY.binary_search(&(x1, y2)).is_ok()
+                && XY.binary_search(&(x2, y1)).is_ok()
+            {
                 ans += 1;
             }
         }
