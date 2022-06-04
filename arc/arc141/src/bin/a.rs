@@ -4,9 +4,10 @@ use proconio::{fastout, input};
 #[fastout]
 fn main() {
     input! {
-        N: usize,
+        T: usize,
     }
 
-    let mut ans = 0;
-    println!("{}", ans);
+    for _ in 0..T {
+        input! {N: String}
+    }
 }

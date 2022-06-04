@@ -6,7 +6,7 @@ fn main() {
         X: String
     }
 
-    let mut v = X.split(".");
+    let mut v = X.split('.');
     let x = v.next().unwrap();
     let y = match v.last().unwrap().parse::<u8>().unwrap() {
         y if y < 3 => "-",

@@ -4,12 +4,13 @@ use proconio::{fastout, input};
 #[fastout]
 fn main() {
     input! {
-        N: i32,
         A: i32,
-        X: i32,
-        Y: i32
+        B: i32,
+        C: i32,
+        D: i32
     }
 
-    let ans = A.min(N) * X + 0.max(N - A) * Y;
+    let x = C * D - B;
+    let ans = if x > 0 { (A + x - 1) / x } else { -1 };
     println!("{}", ans);
 }

@@ -1,6 +1,7 @@
-use proconio::{fastout, input, marker::Usize1};
+use proconio::{fastout, input};
 
-#[allow(dead_code)]
+const MAXN: usize = 200_000;
+
 struct UFT {
     par: Vec<usize>,
     size: Vec<usize>,
@@ -41,8 +42,8 @@ impl UFT {
     }
 
     fn size(&mut self, a: usize) -> usize {
-        let z = self.find(a);
-        self.size[z]
+        let a = self.find(a);
+        self.size[a]
     }
 }
 
@@ -51,21 +52,18 @@ impl UFT {
 fn main() {
     input! {
         N: usize,
+        A: [usize; N]
+    }
+    let mut uft = UFT::new(MAXN + 1);
+    for (i, &a) in A.iter().enumerate().take(N / 2) {
+        uft.unite(a, A[N - 1 - i]);
+    }
+    let mut ans = 0;
+    for i in 0..=MAXN {
+        if i == uft.find(i) {
+            ans += uft.size(i) - 1;
+        }
     }
 
-    let mut edges = vec![];
-    for _ in 1..N {
-        input! {u: Usize1, v: Usize1, w: usize}
-        edges.push((w, u, v));
-    }
-    let mut uft = UFT::new(N);
-
-    let mut ans = 0usize;
-    edges.sort_unstable();
-
-    for &(w, u, v) in &edges {
-        ans += w * uft.size(u) * uft.size(v);
-        uft.unite(u, v);
-    }
     println!("{}", ans);
 }

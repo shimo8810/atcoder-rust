@@ -1,15 +1,14 @@
 use proconio::{fastout, input};
 
+const D: u32 = 998_244_353;
+
 #[allow(non_snake_case)]
 #[fastout]
 fn main() {
     input! {
-        N: i32,
-        A: i32,
-        X: i32,
-        Y: i32
+        N: usize,
     }
 
-    let ans = A.min(N) * X + 0.max(N - A) * Y;
+    let mut ans = 0;
     println!("{}", ans);
 }

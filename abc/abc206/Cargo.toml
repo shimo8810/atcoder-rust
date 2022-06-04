@@ -1,5 +1,5 @@
 [package]
-name = "abc210"
+name = "abc206"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,7 +7,7 @@ edition = "2021"
 [dependencies]
 itertools = "0.10.3"
 num = "0.4.0"
-petgraph = "0.6.1"
+petgraph = "0.6.2"
 proconio = { version = "0.4.3", features = ["derive"] }
 
 [profile.release]
