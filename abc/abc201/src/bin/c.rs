@@ -22,6 +22,8 @@ fn dfs(pw: &mut Vec<u8>, s: &[char]) -> usize {
 
     count
 }
+
+
 #[allow(non_snake_case)]
 #[fastout]
 fn main() {

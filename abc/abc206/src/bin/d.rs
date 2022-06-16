@@ -2,18 +2,17 @@ use proconio::{fastout, input};
 
 const MAXN: usize = 200_000;
 
-struct UFT {
+struct UnionFind {
     par: Vec<usize>,
     size: Vec<usize>,
-    n: usize,
 }
 
 #[allow(dead_code)]
-impl UFT {
+impl UnionFind {
     fn new(n: usize) -> Self {
         let par = (0..n).collect();
         let size = vec![1; n];
-        Self { par, size, n }
+        Self { par, size }
     }
     fn find(&mut self, a: usize) -> usize {
         if self.par[a] == a {
@@ -54,7 +53,7 @@ fn main() {
         N: usize,
         A: [usize; N]
     }
-    let mut uft = UFT::new(MAXN + 1);
+    let mut uft = UnionFind::new(MAXN + 1);
     for (i, &a) in A.iter().enumerate().take(N / 2) {
         uft.unite(a, A[N - 1 - i]);
     }
