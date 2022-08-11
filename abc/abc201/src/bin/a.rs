@@ -1,6 +1,8 @@
 use proconio::{fastout, input};
+
 const YES: &str = "Yes";
 const NO: &str = "No";
+
 #[allow(non_snake_case)]
 #[fastout]
 fn main() {
