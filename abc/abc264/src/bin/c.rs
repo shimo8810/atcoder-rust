@@ -16,19 +16,18 @@ fn main() {
 
     for h in (0..H1).combinations(H2) {
         for w in (0..W1).combinations(W2) {
-            // let mut c = vec![vec![0; W2]; H2];
+            let mut flag = true;
             for (i, &y) in h.iter().enumerate() {
-                let mut flag = true;
                 for (j, &x) in w.iter().enumerate() {
                     if B[i][j] != A[y][x] {
                         flag = false;
                         break;
                     }
                 }
-                if flag {
-                    println!("{}", YES);
-                    return;
-                }
+            }
+            if flag {
+                println!("{}", YES);
+                return;
             }
         }
     }
