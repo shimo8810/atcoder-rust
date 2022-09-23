@@ -4,9 +4,9 @@ use proconio::{fastout, input};
 #[fastout]
 fn main() {
     input! {
-        N: usize,
+        N: u32,
+        X: u32
     }
-
-    let mut ans = 0;
+    let ans = (b'A' + ((X - 1) / N) as u8) as char;
     println!("{}", ans);
 }
