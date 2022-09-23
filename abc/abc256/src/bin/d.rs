@@ -1,46 +1,25 @@
-use proconio::{fastout, input, marker::Usize1};
-use std::collections::HashSet;
-use std::collections::VecDeque;
+use proconio::{fastout, input};
 
 #[allow(non_snake_case)]
 #[fastout]
 fn main() {
     input! {
         N: usize,
-        M: usize,
-        A: [i64; N],
+        mut LR: [(u32, u32); N]
     }
+    LR.sort_unstable();
 
-    let mut graph = vec![vec![]; N];
-    for _ in 0..M {
-        input! {U: Usize1, V: Usize1}
-        graph[U].push(V);
-        graph[V].push(U);
-    }
+    let mut h = LR[0].0;
+    let mut t = LR[0].1;
 
-    let mut ng = -1i64;
-    let mut ok = A.iter().sum::<i64>();
-
-    while ok - ng > 1 {
-        let mid = (ok + ng) / 2;
-
-        let mut s = vec![0; N];
-        let mut que = VecDeque::new();
-        for u in 0..N {
-            for &v in &graph[u] {
-                s[u] += A[v];
-            }
-            if s[u] <= mid {
-                que.push_back(u);
-            }
-        }
-
-        if true {
-            ok = mid;
-        } else {
-            ng = mid;
+    for (l, r) in LR.into_iter() {
+        if t < l {
+            println!("{} {}", h, t);
+            h = l;
+            t = r;
+        } else if t < r {
+            t = r;
         }
     }
-
-    println!("{}", ok);
+    println!("{} {}", h, t);
 }
