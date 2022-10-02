@@ -4,9 +4,10 @@ use proconio::{fastout, input};
 #[fastout]
 fn main() {
     input! {
-        N: usize,
+        (_, b): (i32, i32),
+        (c, _): (i32, i32),
     }
 
-    let ans = (N + 100 - 1) / 100;
+    let ans = b - c;
     println!("{}", ans);
 }

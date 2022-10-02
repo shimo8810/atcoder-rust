@@ -1,19 +1,19 @@
 use proconio::{fastout, input};
-use std::collections::HashMap;
 
 #[allow(non_snake_case)]
 #[fastout]
 fn main() {
     input! {
-        N: usize,
-        A: [i64; N]
-    }
-    let M = 200;
-    let mut map = HashMap::new();
-    for &a in &A {
-        *map.entry(a % M).or_insert(0) += 1;
+        n: usize,
+        a: [usize; n]
     }
 
-    let ans: i64 = map.iter().map(|(_, &n)| n * (n - 1) / 2).sum();
+    let mut cnts = vec![0i64; 200];
+
+    for x in a.into_iter() {
+        cnts[x % 200] += 1;
+    }
+
+    let ans: i64 = cnts.into_iter().map(|x| x * (x - 1) / 2).sum();
     println!("{}", ans);
 }

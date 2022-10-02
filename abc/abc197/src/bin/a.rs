@@ -1,12 +1,13 @@
+
 use proconio::{fastout, input};
 
 #[allow(non_snake_case)]
 #[fastout]
 fn main() {
     input! {
-        N: usize,
+        S: String,
     }
 
-    let ans = (N + 100 - 1) / 100;
+    let ans = format!("{}{}", &S[1..], &S[..1]);
     println!("{}", ans);
 }
