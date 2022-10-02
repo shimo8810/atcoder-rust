@@ -1,12 +1,14 @@
 [package]
 name = "abc198"
 version = "0.1.0"
-authors = ["shimo <shimo.8810@gmail.com>"]
-edition = "2018"
+edition = "2021"
 
 # dependencies added to new project
 [dependencies]
-proconio = "0.4.3"
+itertools = "0.10.5"
+num = "0.4.0"
+petgraph = "0.6.2"
+proconio = { version = "0.4.3", features = ["derive"] }
 
 [profile.release]
 lto = true
