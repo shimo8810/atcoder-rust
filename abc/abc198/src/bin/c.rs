@@ -1,6 +1,7 @@
-use proconio::input;
+use proconio::{fastout, input};
 
 #[allow(non_snake_case)]
+#[fastout]
 fn main() {
     input! {
         R: f64,
@@ -8,16 +9,16 @@ fn main() {
         Y: f64
     }
 
-    let D = (X.powi(2) + Y.powi(2)).sqrt();
+    if X + Y == 0.0 {
+        println!("0");
+        return;
+    }
 
-    println!(
-        "{}",
-        if D == R {
-            1
-        } else if D < 2.0 * R {
-            2
-        } else {
-            (D / R).ceil() as i64
-        }
-    );
+    let dist = (X * X + Y * Y).sqrt();
+
+    let mut ans = (dist / R).ceil();
+    if ans == 1.0 && dist != ans {
+        ans += 1.0;
+    }
+    println!("{}", ans);
 }
