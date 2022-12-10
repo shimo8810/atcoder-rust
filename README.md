@@ -1,6 +1,6 @@
 # AtCoder on Rust
-![ABC](https://progress-bar.dev/204/?title=ABC&scale=1491&width=110&suffix=)
-![ARC](https://progress-bar.dev/9/?title=ARC&scale=601&width=110&suffix=)
+![ABC](https://progress-bar.dev/204/?title=ABC&scale=1499&width=110&suffix=)
+![ARC](https://progress-bar.dev/9/?title=ARC&scale=607&width=110&suffix=)
 ![AGC](https://progress-bar.dev/0/?title=AGC&scale=342&width=110&suffix=)
 
 AtCoderのRustによる解答
